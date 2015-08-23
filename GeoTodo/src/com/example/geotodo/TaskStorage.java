@@ -6,8 +6,8 @@ import java.util.UUID;
 import android.content.Context;
 
 public class TaskStorage {
-	private ArrayList<Task> mTasks;
 
+	private ArrayList<Task> mTasks;
 	private static TaskStorage mTaskStorage;
 	private Context mAppContext;
 
@@ -23,8 +23,8 @@ public class TaskStorage {
 		return mTaskStorage;
 	}
 
-	public void addTask(Task c) {
-		mTasks.add(c);
+	public void addTask(Task t) {
+		mTasks.add(t);
 	}
 
 	public ArrayList<Task> getTasks() {
@@ -32,16 +32,16 @@ public class TaskStorage {
 	}
 
 	public Task getTask(UUID id) {
-		for (Task c : mTasks) {
-			if (c.getId().equals(id)) {
-				return c;
+		for (Task t : mTasks) {
+			if (t.getId().equals(id)) {
+				return t;
 			}
 		}
 		return null;
 	}
 
-	public void deleteTask(Task c) {
-		mTasks.remove(c);
+	public void deleteTask(Task t) {
+		mTasks.remove(t);
 	}
 
 }

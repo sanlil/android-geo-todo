@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="8dp" >
+
+    <TextView
+	       android:id="@+id/place_list_item_titleTextView"
+	       android:layout_width="match_parent"
+	       android:layout_height="wrap_content"
+	       android:textStyle="bold"
+	       android:text="Title placeholder" />
+	   
+   <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+	        
+       <TextView
+           android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:layout_weight="0.2"
+	       android:text="Long:" />
+       
+       <TextView
+           android:id="@+id/place_list_item_longitudeTextView"
+           android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:layout_weight="0.3"
+	       android:text="54,123" />
+       
+       <TextView
+           android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:layout_weight="0.2"
+	       android:text="Lat:" />
+       
+       <TextView
+           android:id="@+id/place_list_item_latitudeTextView"
+           android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:layout_weight="0.3"
+	       android:text="18,123" />
+	       
+    </LinearLayout>
+
+</LinearLayout>

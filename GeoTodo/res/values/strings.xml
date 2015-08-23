@@ -7,10 +7,16 @@
     
     <string name="task_title_hint">Enter a title for the task</string>
     <string name="task_title_label">Title</string>
-	<string name="task_details_label">Details</string>
+	<string name="task_duedate_label">Due Date</string>
 	<string name="task_solved_label">Solved?</string>
 	<string name="new_task">New Task</string>
 	<string name="delete_task">Delete</string>
 	<string name="edit_task">Edit</string>
+	
+	<string name="place_title_hint">Enter a name for this location</string>
+    <string name="place_title_label">Name</string>
+	<string name="place_location_label">Location</string>
+	<string name="place_location_latitude">Latitude</string>
+	<string name="place_location_longitude">Longitude</string>
 
 </resources>
