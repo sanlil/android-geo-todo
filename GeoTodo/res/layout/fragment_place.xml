@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="@string/place_title_label" />
     
-    <EditText android:id="@+id/place_title"
+    <EditText android:id="@+id/place_title_textfield"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:hint="@string/place_title_hint"
@@ -37,11 +37,12 @@
 	        android:layout_weight="0.5"
 	        android:text="@string/place_location_latitude" />
         
-        <TextView
+        <EditText
+            android:id="@+id/latitude_textfield"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="0.5"
-	        android:text="52,1234" />
+	        android:text="0,0" />
     </LinearLayout>
     
     <LinearLayout
@@ -59,11 +60,12 @@
 	        android:layout_weight="0.5"
 	        android:text="@string/place_location_longitude" />
         
-        <TextView
+        <EditText
+            android:id="@+id/longitude_textfield"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="0.5"
-	        android:text="18,1234" />
+	        android:text="0,0" />
     </LinearLayout>
     
 </LinearLayout>

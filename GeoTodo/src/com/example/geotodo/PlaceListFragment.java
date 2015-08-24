@@ -125,14 +125,16 @@ public class PlaceListFragment extends ListFragment {
 			Place place = getItem(position);
 
 			TextView titleTextView = (TextView) convertView
-					.findViewById(R.id.place_list_item_titleTextView);
+					.findViewById(R.id.place_list_item_title);
 			titleTextView.setText(place.getTitle());
-			// TextView longTextView = (TextView) convertView
-			// .findViewById(R.id.place_list_item_longitudeTextView);
-			// longTextView.setText(String.valueOf(place.getLongitude()));
-			// TextView latTextView = (TextView) convertView
-			// .findViewById(R.id.place_list_item_latitudeTextView);
-			// latTextView.setText(String.valueOf(place.getLatitude()));
+
+			TextView longTextView = (TextView) convertView
+					.findViewById(R.id.place_list_item_longitude);
+			longTextView.setText(String.valueOf(place.getLongitude()));
+
+			TextView latTextView = (TextView) convertView
+					.findViewById(R.id.place_list_item_latitude);
+			latTextView.setText(String.valueOf(place.getLatitude()));
 
 			return convertView;
 		}
