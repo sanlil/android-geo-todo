@@ -18,5 +18,8 @@
 	<string name="place_location_label">Location</string>
 	<string name="place_location_latitude">Latitude</string>
 	<string name="place_location_longitude">Longitude</string>
+	
+	<string name="no_place_message">You don\'t have any to-do list for this location yet</string>
+	<string name="no_place_add_button">Add this location</string>
 
 </resources>
