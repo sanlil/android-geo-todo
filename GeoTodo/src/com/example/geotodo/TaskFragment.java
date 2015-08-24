@@ -1,5 +1,6 @@
 package com.example.geotodo;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import android.annotation.TargetApi;
@@ -41,8 +42,15 @@ public class TaskFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
+
 		UUID taskId = (UUID) getArguments().getSerializable(EXTRA_TASK_ID);
-		mTask = TaskStorage.get(getActivity()).getTask(taskId);
+		ArrayList<Place> places = PlaceList.get().getPlaces();
+		for (Place place : places) {
+			TaskList tl = place.getTaskList();
+			if (tl.getTask(taskId) != null) {
+				mTask = tl.getTask(taskId);
+			}
+		}
 	}
 
 	@TargetApi(11)

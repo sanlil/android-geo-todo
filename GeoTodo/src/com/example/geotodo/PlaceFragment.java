@@ -36,7 +36,7 @@ public class PlaceFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 		UUID placeId = (UUID) getArguments().getSerializable(EXTRA_PLACE_ID);
-		mPlace = PlaceStorage.get(getActivity()).getPlace(placeId);
+		mPlace = PlaceList.get().getPlace(placeId);
 	}
 
 	@TargetApi(11)

@@ -3,22 +3,18 @@ package com.example.geotodo;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import android.content.Context;
-
-public class PlaceStorage {
+public class PlaceList {
 
 	private ArrayList<Place> mPlaces;
-	private static PlaceStorage mPlaceStorage;
-	private Context mAppContext;
+	private static PlaceList mPlaceStorage;
 
-	private PlaceStorage(Context appContext) {
-		mAppContext = appContext;
+	private PlaceList() {
 		mPlaces = new ArrayList<Place>();
 	}
 
-	public static PlaceStorage get(Context c) {
+	public static PlaceList get() {
 		if (mPlaceStorage == null) {
-			mPlaceStorage = new PlaceStorage(c.getApplicationContext());
+			mPlaceStorage = new PlaceList();
 		}
 		return mPlaceStorage;
 	}

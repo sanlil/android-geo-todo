@@ -28,7 +28,7 @@ public class PlaceListFragment extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-		mPlaces = PlaceStorage.get(getActivity()).getPlaces();
+		mPlaces = PlaceList.get().getPlaces();
 		PlaceAdapter adapter = new PlaceAdapter(mPlaces);
 		setListAdapter(adapter);
 	}
@@ -54,7 +54,9 @@ public class PlaceListFragment extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Place place = ((PlaceAdapter) getListAdapter()).getItem(position);
 		Log.d(TAG, place.getTitle() + "was clicked");
-		Intent i = new Intent(getActivity(), PlaceActivity.class);
+		// Intent i = new Intent(getActivity(), PlaceActivity.class);
+		// i.putExtra(PlaceFragment.EXTRA_PLACE_ID, place.getId());
+		Intent i = new Intent(getActivity(), TaskListActivity.class);
 		i.putExtra(PlaceFragment.EXTRA_PLACE_ID, place.getId());
 		startActivity(i);
 	}
@@ -71,7 +73,7 @@ public class PlaceListFragment extends ListFragment {
 		switch (item.getItemId()) {
 		case R.id.menu_item_new_task:
 			Place place = new Place();
-			PlaceStorage.get(getActivity()).addPlace(place);
+			PlaceList.get().addPlace(place);
 			Intent i = new Intent(getActivity(), PlaceActivity.class);
 			i.putExtra(PlaceFragment.EXTRA_PLACE_ID, place.getId());
 			startActivityForResult(i, 0);
@@ -98,7 +100,7 @@ public class PlaceListFragment extends ListFragment {
 		Place place = adapter.getItem(position);
 		switch (item.getItemId()) {
 		case R.id.menu_item_delete_task:
-			PlaceStorage.get(getActivity()).deletePlace(place);
+			PlaceList.get().deletePlace(place);
 			adapter.notifyDataSetChanged();
 			return true;
 		case R.id.menu_item_edit_task:

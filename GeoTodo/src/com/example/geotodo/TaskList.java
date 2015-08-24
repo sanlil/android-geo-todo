@@ -3,24 +3,12 @@ package com.example.geotodo;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import android.content.Context;
-
-public class TaskStorage {
+public class TaskList {
 
 	private ArrayList<Task> mTasks;
-	private static TaskStorage mTaskStorage;
-	private Context mAppContext;
 
-	private TaskStorage(Context appContext) {
-		mAppContext = appContext;
+	public TaskList() {
 		mTasks = new ArrayList<Task>();
-	}
-
-	public static TaskStorage get(Context c) {
-		if (mTaskStorage == null) {
-			mTaskStorage = new TaskStorage(c.getApplicationContext());
-		}
-		return mTaskStorage;
 	}
 
 	public void addTask(Task t) {

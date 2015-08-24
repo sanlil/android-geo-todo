@@ -8,9 +8,11 @@ public class Place {
 	private String mTitle;
 	private double mLongitude;
 	private double mLatitude;
+	private TaskList taskList;
 
 	public Place() {
 		mId = UUID.randomUUID(); // Generate unique identifier
+		taskList = new TaskList();
 	}
 
 	public UUID getId() {
@@ -27,6 +29,10 @@ public class Place {
 
 	public double getLatitude() {
 		return mLatitude;
+	}
+
+	public TaskList getTaskList() {
+		return taskList;
 	}
 
 	public void setTitle(String title) {

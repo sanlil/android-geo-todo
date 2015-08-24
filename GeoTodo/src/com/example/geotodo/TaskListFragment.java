@@ -1,6 +1,7 @@
 package com.example.geotodo;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,16 +22,29 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class TaskListFragment extends ListFragment {
+	public static final String EXTRA_PLACE_ID = "sandrasplayground.summercourse.criminalintent.place_id";
 
 	private static final String TAG = "TaskListFragment";
-	private ArrayList<Task> mTasks;
+	private TaskList mTaskList;
+
+	public static TaskListFragment newInstance(UUID placeId) {
+		Bundle args = new Bundle();
+		args.putSerializable(EXTRA_PLACE_ID, placeId);
+
+		TaskListFragment fragment = new TaskListFragment();
+		fragment.setArguments(args);
+
+		return fragment;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-		mTasks = TaskStorage.get(getActivity()).getTasks();
-		TaskAdapter adapter = new TaskAdapter(mTasks);
+		UUID placeId = (UUID) getArguments().getSerializable(EXTRA_PLACE_ID);
+		Place place = PlaceList.get().getPlace(placeId);
+		mTaskList = place.getTaskList();
+		TaskAdapter adapter = new TaskAdapter(mTaskList.getTasks());
 		setListAdapter(adapter);
 	}
 
@@ -82,7 +96,7 @@ public class TaskListFragment extends ListFragment {
 		switch (item.getItemId()) {
 		case R.id.menu_item_new_task:
 			Task task = new Task();
-			TaskStorage.get(getActivity()).addTask(task);
+			mTaskList.addTask(task);
 			Intent i = new Intent(getActivity(), TaskActivity.class);
 			// Intent i = new Intent(getActivity(), CrimePagerActivity.class);
 			i.putExtra(TaskFragment.EXTRA_TASK_ID, task.getId());
@@ -110,7 +124,7 @@ public class TaskListFragment extends ListFragment {
 		Task task = adapter.getItem(position);
 		switch (item.getItemId()) {
 		case R.id.menu_item_delete_task:
-			TaskStorage.get(getActivity()).deleteTask(task);
+			mTaskList.deleteTask(task);
 			adapter.notifyDataSetChanged();
 			return true;
 		case R.id.menu_item_edit_task:
