@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
 
+	static final int NUM_ITEMS = 2;
+
 	public TabsPagerAdapter(FragmentManager fm) {
 		super(fm);
 	}
@@ -16,10 +18,10 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 		switch (index) {
 		case 0:
 			// Top Rated fragment activity
-			return new TestFragment1();
+			return new LocationFragment();
 		case 1:
 			// Games fragment activity
-			return new TestFragment2();
+			return new PlaceListFragment();
 		}
 
 		return null;
@@ -28,7 +30,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public int getCount() {
 		// get item count - equal to number of tabs
-		return 2;
+		return NUM_ITEMS;
 	}
 
 }
