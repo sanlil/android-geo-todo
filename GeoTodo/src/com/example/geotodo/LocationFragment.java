@@ -92,7 +92,7 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 	 */
 	private Place getClosestPlace() {
 		if (mLastLocation != null) {
-			for (Place place : PlaceList.get().getPlaces()) {
+			for (Place place : PlaceStorage.get(getActivity()).getPlaces()) {
 				Log.d(TAG, "place: " + place.getTitle());
 				if (isSameLocation(place)) {
 					return place;

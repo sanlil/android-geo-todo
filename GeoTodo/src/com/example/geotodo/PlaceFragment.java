@@ -25,7 +25,7 @@ import com.google.android.gms.location.LocationServices;
 
 public class PlaceFragment extends Fragment implements ConnectionCallbacks,
 		OnConnectionFailedListener {
-	public static final String EXTRA_PLACE_ID = "sandrasplayground.summercourse.criminalintent.place_id";
+	static final String EXTRA_PLACE_ID = "sandrasplayground.summercourse.criminalintent.place_id";
 	private static final String TAG = "PlaceFragment";
 
 	private Place mPlace;
@@ -50,7 +50,7 @@ public class PlaceFragment extends Fragment implements ConnectionCallbacks,
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 		UUID placeId = (UUID) getArguments().getSerializable(EXTRA_PLACE_ID);
-		mPlace = PlaceList.get().getPlace(placeId);
+		mPlace = PlaceStorage.get(getActivity()).getPlace(placeId);
 	}
 
 	@TargetApi(11)
@@ -92,6 +92,13 @@ public class PlaceFragment extends Fragment implements ConnectionCallbacks,
 		});
 
 		return v;
+	}
+
+	@Override
+	public void onPause() {
+		Log.d(TAG, "onPause()");
+		super.onPause();
+		PlaceStorage.get(getActivity()).savePlaces();
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 
 public class TaskFragment extends Fragment {
+	private static final String TAG = "TaskFragment";
 	public static final String EXTRA_TASK_ID = "sandrasplayground.summercourse.criminalintent.task_id";
 
 	private Task mTask;
@@ -44,7 +46,7 @@ public class TaskFragment extends Fragment {
 		setHasOptionsMenu(true);
 
 		UUID taskId = (UUID) getArguments().getSerializable(EXTRA_TASK_ID);
-		ArrayList<Place> places = PlaceList.get().getPlaces();
+		ArrayList<Place> places = PlaceStorage.get(getActivity()).getPlaces();
 		for (Place place : places) {
 			TaskList tl = place.getTaskList();
 			if (tl.getTask(taskId) != null) {
@@ -99,6 +101,13 @@ public class TaskFragment extends Fragment {
 				});
 
 		return v;
+	}
+
+	@Override
+	public void onPause() {
+		Log.d(TAG, "onPause()");
+		super.onPause();
+		PlaceStorage.get(getActivity()).savePlaces();
 	}
 
 	@Override

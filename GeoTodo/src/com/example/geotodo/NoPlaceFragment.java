@@ -22,7 +22,7 @@ public class NoPlaceFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Place place = new Place();
-				PlaceList.get().addPlace(place);
+				PlaceStorage.get(getActivity()).addPlace(place);
 				Intent i = new Intent(getActivity(), PlaceActivity.class);
 				i.putExtra(PlaceFragment.EXTRA_PLACE_ID, place.getId());
 				startActivityForResult(i, 0);

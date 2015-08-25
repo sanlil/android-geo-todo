@@ -42,7 +42,7 @@ public class TaskListFragment extends ListFragment {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 		UUID placeId = (UUID) getArguments().getSerializable(EXTRA_PLACE_ID);
-		Place place = PlaceList.get().getPlace(placeId);
+		Place place = PlaceStorage.get(getActivity()).getPlace(placeId);
 		mTaskList = place.getTaskList();
 		TaskAdapter adapter = new TaskAdapter(mTaskList.getTasks());
 		setListAdapter(adapter);
