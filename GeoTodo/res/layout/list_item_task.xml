@@ -4,7 +4,7 @@
     android:layout_height="wrap_content" >
 
     <CheckBox
-        android:id="@+id/task_list_item_solvedCheckBox"
+        android:id="@+id/task_list_item_solved"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -14,24 +14,14 @@
         android:focusable="false" />
 
     <TextView
-        android:id="@+id/task_list_item_titleTextView"
+        android:id="@+id/task_list_item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/task_list_item_solvedCheckBox"
-        android:textStyle="bold"
+        android:layout_toLeftOf="@id/task_list_item_solved"
+        android:gravity="center_vertical"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
-        android:text="Title placeholder" />
-
-    <TextView
-        android:id="@+id/task_list_item_dateTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/task_list_item_solvedCheckBox"
-        android:layout_below="@id/task_list_item_titleTextView"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingTop="4dp"
-        android:text="Date placeholder" />
+        android:text="Title placeholder"
+        android:textStyle="bold" />
 
 </RelativeLayout>

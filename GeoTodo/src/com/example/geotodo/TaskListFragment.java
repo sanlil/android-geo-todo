@@ -140,6 +140,9 @@ public class TaskListFragment extends ListFragment {
 
 	private class TaskAdapter extends ArrayAdapter<Task> {
 
+		TextView titleView;
+		CheckBox solvedCheckBox;
+
 		public TaskAdapter(ArrayList<Task> tasks) {
 			super(getActivity(), 0, tasks);
 		}
@@ -153,14 +156,12 @@ public class TaskListFragment extends ListFragment {
 
 			Task task = getItem(position);
 
-			TextView titleTextView = (TextView) convertView
-					.findViewById(R.id.task_list_item_titleTextView);
-			titleTextView.setText(task.getTitle());
-			TextView dateTextView = (TextView) convertView
-					.findViewById(R.id.task_list_item_dateTextView);
-			dateTextView.setText(task.getDueDate().toString());
-			CheckBox solvedCheckBox = (CheckBox) convertView
-					.findViewById(R.id.task_list_item_solvedCheckBox);
+			titleView = (TextView) convertView
+					.findViewById(R.id.task_list_item_title);
+			titleView.setText(task.getTitle());
+
+			solvedCheckBox = (CheckBox) convertView
+					.findViewById(R.id.task_list_item_solved);
 			solvedCheckBox.setChecked(task.isDone());
 
 			return convertView;

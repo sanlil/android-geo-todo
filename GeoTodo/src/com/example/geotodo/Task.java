@@ -1,6 +1,5 @@
 package com.example.geotodo;
 
-import java.util.Date;
 import java.util.UUID;
 
 import org.json.JSONException;
@@ -14,12 +13,10 @@ public class Task {
 
 	private UUID mId;
 	private String mTitle;
-	private Date mDueDate;
 	private boolean mIsDone;
 
 	public Task() {
 		mId = UUID.randomUUID(); // Generate unique identifier
-		mDueDate = new Date();
 	}
 
 	public Task(JSONObject json) throws JSONException {
@@ -28,7 +25,6 @@ public class Task {
 			mTitle = json.getString(JSON_TITLE);
 		}
 		mIsDone = json.getBoolean(JSON_DONE);
-		mDueDate = new Date();
 	}
 
 	public UUID getId() {
@@ -39,20 +35,12 @@ public class Task {
 		return mTitle;
 	}
 
-	public Date getDueDate() {
-		return mDueDate;
-	}
-
 	public boolean isDone() {
 		return mIsDone;
 	}
 
 	public void setTitle(String title) {
 		mTitle = title;
-	}
-
-	public void setDueDate(Date dueDate) {
-		mDueDate = dueDate;
 	}
 
 	public void setDone(boolean isDone) {

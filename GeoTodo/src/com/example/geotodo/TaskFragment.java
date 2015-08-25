@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -27,7 +26,6 @@ public class TaskFragment extends Fragment {
 
 	private Task mTask;
 	private EditText mTitleField;
-	private Button mDateButton;
 	private CheckBox mSolvedCheckBox;
 
 	public static TaskFragment newInstance(UUID taskId) {
@@ -85,10 +83,6 @@ public class TaskFragment extends Fragment {
 			}
 
 		});
-
-		mDateButton = (Button) v.findViewById(R.id.task_date);
-		mDateButton.setText(mTask.getDueDate().toString());
-		mDateButton.setEnabled(false);
 
 		mSolvedCheckBox = (CheckBox) v.findViewById(R.id.task_solved);
 		mSolvedCheckBox.setChecked(mTask.isDone());
