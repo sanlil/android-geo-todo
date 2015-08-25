@@ -1,51 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="8dp"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
-    android:paddingTop="8dp" >
-
-    <TextView
-	       android:id="@+id/place_list_item_title"
-	       android:layout_width="match_parent"
-	       android:layout_height="wrap_content"
-	       android:textStyle="bold"
-	       android:text="Title placeholder" />
-	   
-   <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-	        
-       <TextView
-           android:layout_width="wrap_content"
-	       android:layout_height="wrap_content"
-	       android:layout_weight="0.2"
-	       android:text="Long:" />
-       
-       <TextView
-           android:id="@+id/place_list_item_longitude"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_weight="0.3"
-           android:text="0,0" />
-       
-       <TextView
-           android:layout_width="wrap_content"
-	       android:layout_height="wrap_content"
-	       android:layout_weight="0.2"
-	       android:text="Lat:" />
-       
-       <TextView
-           android:id="@+id/place_list_item_latitude"
-           android:layout_width="wrap_content"
-	       android:layout_height="wrap_content"
-	       android:layout_weight="0.3"
-	       android:text="0,0" />
-	       
-    </LinearLayout>
+        android:orientation="horizontal"
+        android:padding="16dp" >
+        
+        <TextView
+            android:id="@+id/place_list_item_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:gravity="center_vertical"
+            android:text="Title"
+            android:textSize="32sp" />
+        
+        <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.5"
+	        android:orientation="vertical" >
 
-</LinearLayout>
+	         <LinearLayout
+		         android:layout_width="match_parent"
+		         android:layout_height="wrap_content"
+		         android:layout_weight="0.5"
+		         android:gravity="right"
+		         android:orientation="horizontal"
+		         android:paddingBottom="4dp"
+		         android:paddingTop="4dp" >
+	
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:paddingRight="8dp"
+				    android:textColor="#555555"
+				    android:textSize="16sp"
+				    android:textStyle="bold"
+				    android:text="@string/place_list_item_lat_label" />
+				   
+				<TextView
+				    android:id="@+id/place_list_item_longitude"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:textColor="#555555"
+				    android:textSize="16sp"
+				    android:text="0.0" />
+	         </LinearLayout>
+	         
+	         <LinearLayout
+	             android:layout_width="match_parent"
+	             android:layout_height="wrap_content"
+	             android:layout_weight="0.5"
+	             android:gravity="right"
+	             android:orientation="horizontal"
+	             android:paddingBottom="4dp"
+	             android:paddingTop="4dp" >
+	
+		          <TextView
+		              android:layout_width="wrap_content"
+		              android:layout_height="wrap_content"
+		              android:textColor="#555555"
+		              android:paddingRight="8dp"
+		              android:textSize="16sp"
+		              android:textStyle="bold" 
+		              android:text="@string/place_list_item_long_label" />
+		             
+		          <TextView
+		              android:id="@+id/place_list_item_latitude"
+		              android:layout_width="wrap_content"
+		              android:layout_height="wrap_content"
+		              android:textColor="#555555"
+		              android:textSize="16sp"
+		              android:text="0.0" />
+			</LinearLayout>
+		</LinearLayout>
+
+	</LinearLayout>
+
+

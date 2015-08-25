@@ -3,6 +3,7 @@ package com.example.geotodo;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -111,27 +112,31 @@ public class PlaceListFragment extends ListFragment {
 
 	private class PlaceAdapter extends ArrayAdapter<Place> {
 
+		private int[] rowColors = new int[] { Color.parseColor("#eeeeee"),
+				Color.parseColor("#dddddd") };
+
 		public PlaceAdapter(ArrayList<Place> places) {
 			super(getActivity(), 0, places);
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
+			// Set layout and color on list items
 			if (convertView == null) {
 				convertView = getActivity().getLayoutInflater().inflate(
 						R.layout.list_item_place, null);
 			}
+			int colorPos = position % rowColors.length;
+			convertView.setBackgroundColor(rowColors[colorPos]);
 
+			// Set corresponding text on items
 			Place place = getItem(position);
-
 			TextView titleTextView = (TextView) convertView
 					.findViewById(R.id.place_list_item_title);
 			titleTextView.setText(place.getTitle());
-
 			TextView longTextView = (TextView) convertView
 					.findViewById(R.id.place_list_item_longitude);
 			longTextView.setText(String.valueOf(place.getLongitude()));
-
 			TextView latTextView = (TextView) convertView
 					.findViewById(R.id.place_list_item_latitude);
 			latTextView.setText(String.valueOf(place.getLatitude()));

@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -21,6 +23,10 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 
 	private GoogleApiClient mGoogleApiClient;
 	private Location mLastLocation;
+	private TextView mPlaceTitleView;
+	private TextView mLatitudeView;
+	private TextView mLongitudeView;
+	private LinearLayout mHeaderLayout;
 
 	protected synchronized void buildGoogleApiClient() {
 		mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
@@ -35,6 +41,13 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 		Log.d(TAG, "onCreateView()");
 		View v = inflater.inflate(R.layout.fragment_location_container,
 				container, false);
+		mPlaceTitleView = (TextView) v.findViewById(R.id.place_list_item_title);
+		mLatitudeView = (TextView) v
+				.findViewById(R.id.place_list_item_latitude);
+		mLongitudeView = (TextView) v
+				.findViewById(R.id.place_list_item_longitude);
+		mHeaderLayout = (LinearLayout) v
+				.findViewById(R.id.current_place_header);
 		buildGoogleApiClient();
 		return v;
 	}
@@ -53,12 +66,11 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 		super.onStop();
 	}
 
-	private boolean isSameLocation(Place place) {
-		boolean latIsSame = (place.getLatitude() == mLastLocation.getLatitude());
-		boolean longIsSame = (place.getLongitude() == mLastLocation
-				.getLongitude());
-		Log.d(TAG, "is same location: " + (latIsSame && longIsSame));
-		return (latIsSame && longIsSame);
+	@Override
+	public void onResume() {
+		Log.d(TAG, "onResume()");
+		super.onResume();
+		mGoogleApiClient.connect();
 	}
 
 	@Override
@@ -68,29 +80,64 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 		Log.d(TAG, "lat: " + mLastLocation.getLatitude() + " long: "
 				+ mLastLocation.getLongitude());
 
-		// Check if any Place location is the same as the current GPS location
-		Place currentPosition = null;
+		Place currentPlace = getClosestPlace();
+		Fragment fragmentToShow = getTaskListFragment(currentPlace);
+		showTaskListFragment(fragmentToShow);
+
+	}
+
+	/*
+	 * Check if any Place location is the same as the current GPS location and
+	 * return it, otherwise return null
+	 */
+	private Place getClosestPlace() {
 		if (mLastLocation != null) {
 			for (Place place : PlaceList.get().getPlaces()) {
 				Log.d(TAG, "place: " + place.getTitle());
 				if (isSameLocation(place)) {
-					currentPosition = place;
-					// break;
+					return place;
 				}
 			}
 		}
+		return null;
+	}
 
-		// Show the TaskListFragment corresponding to current GPS location
-		// or if there's no match, a default view
-		Fragment fragmentToShow;
-		if (currentPosition != null) {
-			Log.d(TAG, "fragmentToShow: " + currentPosition.getTitle());
-			fragmentToShow = TaskListFragment.newInstance(currentPosition
-					.getId());
+	private boolean isSameLocation(Place place) {
+		boolean latIsSame = (place.getLatitude() == mLastLocation.getLatitude());
+		boolean longIsSame = (place.getLongitude() == mLastLocation
+				.getLongitude());
+		Log.d(TAG, "is same location: " + (latIsSame && longIsSame));
+		return (latIsSame && longIsSame);
+	}
+
+	/*
+	 * Return the TaskListFragment corresponding to current GPS location or if
+	 * there's no match, a default view
+	 */
+	private Fragment getTaskListFragment(Place place) {
+		if (place != null) {
+			Log.d(TAG, "fragmentToShow: " + place.getTitle());
+			showPlaceHeader(place);
+			return TaskListFragment.newInstance(place.getId());
 		} else {
-			Log.d(TAG, "No fragment to show");
-			fragmentToShow = new NoPlaceFragment();
+			Log.d(TAG, "No place found for this location");
+			hidePlaceHeader();
+			return new NoPlaceFragment();
 		}
+	}
+
+	private void showPlaceHeader(Place place) {
+		mPlaceTitleView.setText(place.getTitle());
+		mLatitudeView.setText(String.valueOf(place.getLatitude()));
+		mLongitudeView.setText(String.valueOf(place.getLongitude()));
+		mHeaderLayout.setVisibility(LinearLayout.VISIBLE);
+	}
+
+	private void hidePlaceHeader() {
+		mHeaderLayout.setVisibility(LinearLayout.GONE);
+	}
+
+	private void showTaskListFragment(Fragment fragmentToShow) {
 		getActivity().getSupportFragmentManager().beginTransaction()
 				.replace(R.id.fragment_container, fragmentToShow).commit();
 	}
