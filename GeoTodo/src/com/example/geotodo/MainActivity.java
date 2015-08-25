@@ -13,6 +13,7 @@ public class MainActivity extends FragmentActivity {
 	private ActionBar actionBar;
 	private String[] tabs = { "Tasks", "Places" };
 
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
@@ -62,6 +63,16 @@ public class MainActivity extends FragmentActivity {
 					.setTabListener(tabListener));
 		}
 
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
 	}
 
 }

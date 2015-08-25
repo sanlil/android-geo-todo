@@ -124,11 +124,16 @@ public class TaskListFragment extends ListFragment {
 		Task task = adapter.getItem(position);
 		switch (item.getItemId()) {
 		case R.id.menu_item_delete_task:
+			// Delete item
 			mTaskList.deleteTask(task);
 			adapter.notifyDataSetChanged();
 			return true;
 		case R.id.menu_item_edit_task:
 			// Go to edit page
+			Intent i = new Intent(getActivity(), TaskActivity.class);
+			i.putExtra(TaskFragment.EXTRA_TASK_ID, task.getId());
+			startActivityForResult(i, 0);
+			return true;
 		}
 		return super.onContextItemSelected(item);
 	}

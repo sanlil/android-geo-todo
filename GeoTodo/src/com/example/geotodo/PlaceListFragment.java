@@ -101,11 +101,16 @@ public class PlaceListFragment extends ListFragment {
 		Place place = adapter.getItem(position);
 		switch (item.getItemId()) {
 		case R.id.menu_item_delete_task:
+			// Delete item
 			PlaceList.get().deletePlace(place);
 			adapter.notifyDataSetChanged();
 			return true;
 		case R.id.menu_item_edit_task:
 			// Go to edit page
+			Intent i = new Intent(getActivity(), PlaceActivity.class);
+			i.putExtra(PlaceFragment.EXTRA_PLACE_ID, place.getId());
+			startActivityForResult(i, 0);
+			return true;
 		}
 		return super.onContextItemSelected(item);
 	}
