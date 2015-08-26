@@ -24,5 +24,7 @@
 	<string name="no_place_message">You don\'t have any to-do list for this location yet</string>
 	<string name="no_place_add_button">Add this location</string>
 	
+	<string name="new_task_button">+ New list item</string>
+	
 
 </resources>

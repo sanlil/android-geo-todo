@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -48,17 +49,20 @@ public class TaskListFragment extends ListFragment {
 		mTaskList = place.getTaskList();
 		TaskAdapter adapter = new TaskAdapter(mTaskList.getTasks());
 		setListAdapter(adapter);
+		Log.d(TAG, "onCreate()");
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		((TaskAdapter) getListAdapter()).notifyDataSetChanged();
+		Log.d(TAG, "onResume()");
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle savedInstanceState) {
+		Log.d(TAG, "onCreateView()");
 		View v = super.onCreateView(inflater, parent, savedInstanceState);
 
 		ListView listView = (ListView) v.findViewById(android.R.id.list);
@@ -73,9 +77,15 @@ public class TaskListFragment extends ListFragment {
 		Log.d(TAG, task.getTitle() + "was clicked");
 
 		// Start TaskActivity
-		Intent i = new Intent(getActivity(), TaskActivity.class);
-		i.putExtra(TaskFragment.EXTRA_TASK_ID, task.getId());
-		startActivity(i);
+		// Intent i = new Intent(getActivity(), TaskActivity.class);
+		// i.putExtra(TaskFragment.EXTRA_TASK_ID, task.getId());
+		// startActivity(i);
+
+		// task.setDone(!task.isDone());
+		// PlaceStorage.get(getActivity()).savePlaces();
+		// CheckBox solvedCheckBox = (CheckBox) v
+		// .findViewById(R.id.task_list_item_solved);
+		// solvedCheckBox.setChecked(task.isDone());
 	}
 
 	@Override
@@ -163,8 +173,20 @@ public class TaskListFragment extends ListFragment {
 											+ !task.isDone());
 							task.setDone(!task.isDone());
 							PlaceStorage.get(getActivity()).savePlaces();
+							// notifyDataSetChanged();
 						}
 					});
+
+			ImageView deleteButton = (ImageView) convertView
+					.findViewById(R.id.task_delete_button);
+			deleteButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					mTaskList.deleteTask(task);
+					notifyDataSetChanged();
+				}
+			});
+
 			return convertView;
 		}
 

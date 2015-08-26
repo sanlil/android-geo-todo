@@ -55,7 +55,9 @@ public class Task {
 	public JSONObject toJSON() throws JSONException {
 		JSONObject json = new JSONObject();
 		json.put(JSON_ID, mId.toString());
-		json.put(JSON_TITLE, mTitle.toString());
+		if (mTitle != null) {
+			json.put(JSON_TITLE, mTitle.toString());
+		}
 		json.put(JSON_DONE, String.valueOf(mIsDone));
 		return json;
 	}

@@ -13,7 +13,7 @@
         android:hint="@string/task_title_hint" />
 
     <ImageView
-        android:id="@+id/task_save_image"
+        android:id="@+id/task_save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.1"

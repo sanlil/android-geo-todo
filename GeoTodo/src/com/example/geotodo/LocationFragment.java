@@ -1,5 +1,6 @@
 package com.example.geotodo;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,10 +25,15 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 
 	private GoogleApiClient mGoogleApiClient;
 	private Location mLastLocation;
+	// private Place currentPlace;
 	private TextView mPlaceTitleView;
 	private TextView mLatitudeView;
 	private TextView mLongitudeView;
 	private LinearLayout mHeaderLayout;
+	private Button mNewTaskButton;
+
+	// private ImageView mSaveButton;
+	// private EditText mNewTaskText;
 
 	protected synchronized void buildGoogleApiClient() {
 		mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
@@ -48,6 +55,9 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 				.findViewById(R.id.place_list_item_longitude);
 		mHeaderLayout = (LinearLayout) v
 				.findViewById(R.id.current_place_header);
+		mNewTaskButton = (Button) v.findViewById(R.id.new_task_button);
+		// mNewTaskText = (EditText) v.findViewById(R.id.new_task_title);
+		// mSaveButton = (ImageView) v.findViewById(R.id.task_save_button);
 		buildGoogleApiClient();
 
 		return v;
@@ -81,9 +91,44 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 		Log.d(TAG, "lat: " + mLastLocation.getLatitude() + " long: "
 				+ mLastLocation.getLongitude());
 
-		Place currentPlace = getClosestPlace();
+		final Place currentPlace = getClosestPlace();
 		Fragment fragmentToShow = getTaskListFragment(currentPlace);
 		showTaskListFragment(fragmentToShow);
+
+		mNewTaskButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Task task = new Task();
+				currentPlace.getTaskList().addTask(task);
+				Intent i = new Intent(getActivity(), TaskActivity.class);
+				i.putExtra(TaskFragment.EXTRA_TASK_ID, task.getId());
+				startActivityForResult(i, 0);
+			}
+		});
+
+		// mSaveButton.setOnClickListener(new View.OnClickListener() {
+		// @Override
+		// public void onClick(View v) {
+		// Log.d(TAG, "CLICK SAVE NEW TASK");
+		// }
+		// });
+		// mNewTaskText.setOnKeyListener(new OnKeyListener() {
+		//
+		// @Override
+		// public boolean onKey(View v, int keyCode, KeyEvent event) {
+		// if (keyCode == KeyEvent.KEYCODE_ENTER
+		// && event.getAction() == KeyEvent.ACTION_DOWN) {
+		// Log.d(TAG, "ENTER CLICK");
+		// Task t = new Task();
+		// t.setTitle(mNewTaskText.getText().toString());
+		// currentPlace.getTaskList().addTask(t);
+		// PlaceStorage.get(getActivity()).savePlaces();
+		// return false;
+		// }
+		// return false;
+		// }
+		// });
 	}
 
 	/*
@@ -148,6 +193,12 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 	}
 
 	private void showTaskListFragment(Fragment fragmentToShow) {
+		Fragment oldFragment = getActivity().getSupportFragmentManager()
+				.findFragmentById(R.id.fragment_container);
+		if (oldFragment != null) {
+			getActivity().getSupportFragmentManager().beginTransaction()
+					.remove(oldFragment).commit();
+		}
 		getActivity().getSupportFragmentManager().beginTransaction()
 				.replace(R.id.fragment_container, fragmentToShow).commit();
 	}

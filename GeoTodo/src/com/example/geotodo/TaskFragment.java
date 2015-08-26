@@ -81,7 +81,7 @@ public class TaskFragment extends Fragment {
 			}
 		});
 
-		mSaveButton = (ImageView) v.findViewById(R.id.task_save_image);
+		mSaveButton = (ImageView) v.findViewById(R.id.task_save_button);
 		mSaveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

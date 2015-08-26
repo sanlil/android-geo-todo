@@ -1,6 +1,7 @@
 package com.example.geotodo;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,6 +49,12 @@ public class DataJSONConverter {
 				writer.close();
 			}
 		}
+	}
+
+	private void clearOldData() {
+		File file = new File(mFilename);
+		if (file.exists())
+			file.delete();
 	}
 
 	public ArrayList<Place> loadPlaces() throws IOException, JSONException {
