@@ -10,8 +10,6 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +41,7 @@ public class TaskListFragment extends ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setHasOptionsMenu(true);
+		// setHasOptionsMenu(true);
 		UUID placeId = (UUID) getArguments().getSerializable(EXTRA_PLACE_ID);
 		Place place = PlaceStorage.get(getActivity()).getPlace(placeId);
 		mTaskList = place.getTaskList();
@@ -88,27 +86,27 @@ public class TaskListFragment extends ListFragment {
 		// solvedCheckBox.setChecked(task.isDone());
 	}
 
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		super.onCreateOptionsMenu(menu, inflater);
-		menu.clear();
-		inflater.inflate(R.menu.fragment_task_list, menu);
-	}
+	// @Override
+	// public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	// super.onCreateOptionsMenu(menu, inflater);
+	// menu.clear();
+	// inflater.inflate(R.menu.fragment_task_list, menu);
+	// }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.menu_item_new_task:
-			Task task = new Task();
-			mTaskList.addTask(task);
-			Intent i = new Intent(getActivity(), TaskActivity.class);
-			i.putExtra(TaskFragment.EXTRA_TASK_ID, task.getId());
-			startActivityForResult(i, 0);
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
+	// @Override
+	// public boolean onOptionsItemSelected(MenuItem item) {
+	// switch (item.getItemId()) {
+	// case R.id.menu_item_new_task:
+	// Task task = new Task();
+	// mTaskList.addTask(task);
+	// Intent i = new Intent(getActivity(), TaskActivity.class);
+	// i.putExtra(TaskFragment.EXTRA_TASK_ID, task.getId());
+	// startActivityForResult(i, 0);
+	// return true;
+	// default:
+	// return super.onOptionsItemSelected(item);
+	// }
+	// }
 
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
