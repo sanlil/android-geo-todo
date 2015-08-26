@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -140,9 +141,6 @@ public class TaskListFragment extends ListFragment {
 
 	private class TaskAdapter extends ArrayAdapter<Task> {
 
-		TextView titleView;
-		CheckBox solvedCheckBox;
-
 		public TaskAdapter(ArrayList<Task> tasks) {
 			super(getActivity(), 0, tasks);
 		}
@@ -154,18 +152,32 @@ public class TaskListFragment extends ListFragment {
 						R.layout.list_item_task, null);
 			}
 
-			Task task = getItem(position);
+			final Task task = getItem(position);
 
-			titleView = (TextView) convertView
+			TextView titleView = (TextView) convertView
 					.findViewById(R.id.task_list_item_title);
 			titleView.setText(task.getTitle());
 
-			solvedCheckBox = (CheckBox) convertView
+			CheckBox solvedCheckBox = (CheckBox) convertView
 					.findViewById(R.id.task_list_item_solved);
 			solvedCheckBox.setChecked(task.isDone());
+			solvedCheckBox
+					.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+						@Override
+						public void onCheckedChanged(CompoundButton buttonView,
+								boolean isChecked) {
+							Log.d(TAG, "Checked is changed");
+							Log.d(TAG,
+									task.getTitle() + " isDone: "
+											+ !task.isDone());
+							task.setDone(!task.isDone());
+							PlaceStorage.get(getActivity()).savePlaces();
+						}
+					});
 
 			return convertView;
 		}
+
 	}
 
 }
