@@ -54,9 +54,9 @@ public class PlaceListFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Place place = ((PlaceAdapter) getListAdapter()).getItem(position);
+
+		// Start TaskListActivity
 		Log.d(TAG, place.getTitle() + "was clicked");
-		// Intent i = new Intent(getActivity(), PlaceActivity.class);
-		// i.putExtra(PlaceFragment.EXTRA_PLACE_ID, place.getId());
 		Intent i = new Intent(getActivity(), TaskListActivity.class);
 		i.putExtra(PlaceFragment.EXTRA_PLACE_ID, place.getId());
 		startActivity(i);
@@ -65,14 +65,14 @@ public class PlaceListFragment extends ListFragment {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
-		// TODO: make specified menu for place list
-		inflater.inflate(R.menu.fragment_task_list, menu);
+		menu.clear();
+		inflater.inflate(R.menu.fragment_place_list, menu);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.menu_item_new_task:
+		case R.id.menu_item_new_place:
 			Place place = new Place();
 			PlaceStorage.get(getActivity()).addPlace(place);
 			Intent i = new Intent(getActivity(), PlaceActivity.class);
@@ -87,8 +87,8 @@ public class PlaceListFragment extends ListFragment {
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
-		getActivity().getMenuInflater().inflate(R.menu.task_list_item_context,
-				menu); // TODO: Change to place specific context menu
+		getActivity().getMenuInflater().inflate(R.menu.place_list_item_context,
+				menu);
 	}
 
 	@Override
@@ -100,12 +100,12 @@ public class PlaceListFragment extends ListFragment {
 		PlaceAdapter adapter = (PlaceAdapter) getListAdapter();
 		Place place = adapter.getItem(position);
 		switch (item.getItemId()) {
-		case R.id.menu_item_delete_task:
+		case R.id.menu_item_delete_place:
 			// Delete item
 			PlaceStorage.get(getActivity()).deletePlace(place);
 			adapter.notifyDataSetChanged();
 			return true;
-		case R.id.menu_item_edit_task:
+		case R.id.menu_item_edit_place:
 			// Go to edit page
 			Intent i = new Intent(getActivity(), PlaceActivity.class);
 			i.putExtra(PlaceFragment.EXTRA_PLACE_ID, place.getId());

@@ -49,6 +49,7 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 		mHeaderLayout = (LinearLayout) v
 				.findViewById(R.id.current_place_header);
 		buildGoogleApiClient();
+
 		return v;
 	}
 
@@ -83,7 +84,6 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 		Place currentPlace = getClosestPlace();
 		Fragment fragmentToShow = getTaskListFragment(currentPlace);
 		showTaskListFragment(fragmentToShow);
-
 	}
 
 	/*

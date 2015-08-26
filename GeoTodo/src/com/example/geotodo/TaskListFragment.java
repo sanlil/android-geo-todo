@@ -64,14 +64,6 @@ public class TaskListFragment extends ListFragment {
 		ListView listView = (ListView) v.findViewById(android.R.id.list);
 		registerForContextMenu(listView);
 
-		// if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-		// // Use floating context menus on Froyo and Gingerbread
-		// registerForContextMenu(listView);
-		// } else {
-		// // Use contextual action bar on Honeycomb and higher
-		// listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-		// }
-
 		return v;
 	}
 
@@ -82,7 +74,6 @@ public class TaskListFragment extends ListFragment {
 
 		// Start TaskActivity
 		Intent i = new Intent(getActivity(), TaskActivity.class);
-		// Intent i = new Intent(getActivity(), CrimePagerActivity.class);
 		i.putExtra(TaskFragment.EXTRA_TASK_ID, task.getId());
 		startActivity(i);
 	}
@@ -90,6 +81,7 @@ public class TaskListFragment extends ListFragment {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
+		menu.clear();
 		inflater.inflate(R.menu.fragment_task_list, menu);
 	}
 
@@ -100,7 +92,6 @@ public class TaskListFragment extends ListFragment {
 			Task task = new Task();
 			mTaskList.addTask(task);
 			Intent i = new Intent(getActivity(), TaskActivity.class);
-			// Intent i = new Intent(getActivity(), CrimePagerActivity.class);
 			i.putExtra(TaskFragment.EXTRA_TASK_ID, task.getId());
 			startActivityForResult(i, 0);
 			return true;
