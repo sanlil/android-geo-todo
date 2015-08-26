@@ -92,22 +92,32 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 	 */
 	private Place getClosestPlace() {
 		if (mLastLocation != null) {
+			double minVal = Double.MAX_VALUE;
+			Place closestPlace = null;
 			for (Place place : PlaceStorage.get(getActivity()).getPlaces()) {
 				Log.d(TAG, "place: " + place.getTitle());
-				if (isSameLocation(place)) {
-					return place;
+				if (minVal > getDistance(place)) {
+					closestPlace = place;
+					minVal = getDistance(place);
 				}
+			}
+			if (minVal < 0.015) {
+				return closestPlace;
 			}
 		}
 		return null;
 	}
 
-	private boolean isSameLocation(Place place) {
-		boolean latIsSame = (place.getLatitude() == mLastLocation.getLatitude());
-		boolean longIsSame = (place.getLongitude() == mLastLocation
-				.getLongitude());
-		Log.d(TAG, "is same location: " + (latIsSame && longIsSame));
-		return (latIsSame && longIsSame);
+	/*
+	 * Returns the Euclidean distance between the current position and a Place
+	 */
+	private double getDistance(Place place) {
+		double diffLat = place.getLatitude() - mLastLocation.getLatitude();
+		double diffLong = place.getLongitude() - mLastLocation.getLongitude();
+		double distance = Math.sqrt(Math.pow(diffLat, 2)
+				+ Math.pow(diffLong, 2));
+		Log.d(TAG, "distance to " + place.getTitle() + ": " + distance);
+		return distance;
 	}
 
 	/*
