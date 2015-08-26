@@ -2,13 +2,12 @@
 <resources>
 
     <string name="app_name">Geo Todo</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="title_new_task">New Task</string>
+    <string name="title_new_place">New Place</string>
     <string name="action_settings">Settings</string>
     
-    <string name="task_title_hint">Enter a title for the task</string>
+    <string name="task_title_hint">I need to...</string>
     <string name="task_title_label">Title</string>
-	<string name="task_duedate_label">Due Date</string>
-	<string name="task_solved_label">Solved?</string>
 	<string name="new_task">New Task</string>
 	<string name="delete_task">Delete</string>
 	<string name="edit_task">Edit</string>

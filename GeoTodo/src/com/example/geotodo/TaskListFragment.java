@@ -19,6 +19,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -162,8 +163,7 @@ public class TaskListFragment extends ListFragment {
 					.findViewById(R.id.task_list_item_solved);
 			solvedCheckBox.setChecked(task.isDone());
 			solvedCheckBox
-					.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-						@Override
+					.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 						public void onCheckedChanged(CompoundButton buttonView,
 								boolean isChecked) {
 							Log.d(TAG, "Checked is changed");
@@ -174,7 +174,6 @@ public class TaskListFragment extends ListFragment {
 							PlaceStorage.get(getActivity()).savePlaces();
 						}
 					});
-
 			return convertView;
 		}
 

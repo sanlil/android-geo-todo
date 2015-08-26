@@ -15,10 +15,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 public class TaskFragment extends Fragment {
 	private static final String TAG = "TaskFragment";
@@ -26,7 +24,7 @@ public class TaskFragment extends Fragment {
 
 	private Task mTask;
 	private EditText mTitleField;
-	private CheckBox mSolvedCheckBox;
+	private ImageView mSaveButton;
 
 	public static TaskFragment newInstance(UUID taskId) {
 		Bundle args = new Bundle();
@@ -81,18 +79,19 @@ public class TaskFragment extends Fragment {
 			public void afterTextChanged(Editable c) {
 				// intentionally left blank
 			}
-
 		});
 
-		mSolvedCheckBox = (CheckBox) v.findViewById(R.id.task_solved);
-		mSolvedCheckBox.setChecked(mTask.isDone());
-		mSolvedCheckBox
-				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-					public void onCheckedChanged(CompoundButton buttonView,
-							boolean isChecked) {
-						mTask.setDone(isChecked);
-					}
-				});
+		mSaveButton = (ImageView) v.findViewById(R.id.task_save_image);
+		mSaveButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// Intent i = new Intent(WinActivity.this, GameActivity.class);
+				// startActivity(i);
+				if (NavUtils.getParentActivityName(getActivity()) != null) {
+					NavUtils.navigateUpFromSameTask(getActivity());
+				}
+			}
+		});
 
 		return v;
 	}
