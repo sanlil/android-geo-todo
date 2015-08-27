@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -30,6 +31,7 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 	private TextView mLatitudeView;
 	private TextView mLongitudeView;
 	private LinearLayout mHeaderLayout;
+	private LinearLayout mNewTaskLayout;
 	private Button mNewTaskButton;
 
 	// private ImageView mSaveButton;
@@ -55,9 +57,12 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 				.findViewById(R.id.place_list_item_longitude);
 		mHeaderLayout = (LinearLayout) v
 				.findViewById(R.id.current_place_header);
+		mNewTaskLayout = (LinearLayout) v
+				.findViewById(R.id.new_task_button_layout);
 		mNewTaskButton = (Button) v.findViewById(R.id.new_task_button);
 		// mNewTaskText = (EditText) v.findViewById(R.id.new_task_title);
 		// mSaveButton = (ImageView) v.findViewById(R.id.task_save_button);
+		showTaskListFragment(new NoPlaceFragment());
 		buildGoogleApiClient();
 
 		return v;
@@ -86,6 +91,7 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 
 	@Override
 	public void onConnected(Bundle arg0) {
+		Log.d(TAG, "onConnected()");
 		mLastLocation = LocationServices.FusedLocationApi
 				.getLastLocation(mGoogleApiClient);
 		Log.d(TAG, "lat: " + mLastLocation.getLatitude() + " long: "
@@ -150,6 +156,7 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 				return closestPlace;
 			}
 		}
+		Log.d(TAG, "getClosestPlace() return null");
 		return null;
 	}
 
@@ -186,13 +193,16 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 		mLatitudeView.setText(String.valueOf(place.getLatitude()));
 		mLongitudeView.setText(String.valueOf(place.getLongitude()));
 		mHeaderLayout.setVisibility(LinearLayout.VISIBLE);
+		mNewTaskLayout.setVisibility(LinearLayout.VISIBLE);
 	}
 
 	private void hidePlaceHeader() {
 		mHeaderLayout.setVisibility(LinearLayout.GONE);
+		mNewTaskLayout.setVisibility(LinearLayout.GONE);
 	}
 
 	private void showTaskListFragment(Fragment fragmentToShow) {
+		Log.d(TAG, "showTaskListFragment(), " + fragmentToShow.toString());
 		Fragment oldFragment = getActivity().getSupportFragmentManager()
 				.findFragmentById(R.id.fragment_container);
 		if (oldFragment != null) {
@@ -206,6 +216,9 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 	@Override
 	public void onConnectionFailed(ConnectionResult arg0) {
 		Log.d(TAG, "onConnectionFailed()");
+		Toast.makeText(getActivity(),
+				"Connection failed. Your location is unknown",
+				Toast.LENGTH_LONG).show();
 	}
 
 	@Override
