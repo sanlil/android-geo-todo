@@ -71,10 +71,10 @@ public class PlaceFragment extends Fragment implements ConnectionCallbacks,
 		}
 
 		mLatitudeField = (EditText) v.findViewById(R.id.latitude_textfield);
-		mLatitudeField.setText(mPlace.getTitle());
+		mLatitudeField.setText(String.valueOf(mPlace.getLatitude()));
 
 		mLongitudeField = (EditText) v.findViewById(R.id.longitude_textfield);
-		mLongitudeField.setText(mPlace.getTitle());
+		mLongitudeField.setText(String.valueOf(mPlace.getLongitude()));
 
 		mTitleField = (EditText) v.findViewById(R.id.place_title_textfield);
 		mTitleField.setText(mPlace.getTitle());

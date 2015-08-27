@@ -39,7 +39,7 @@
 				    android:text="@string/place_list_item_lat_label" />
 				   
 				<TextView
-				    android:id="@+id/place_list_item_longitude"
+				    android:id="@+id/place_list_item_latitude"
 				    android:layout_width="wrap_content"
 				    android:layout_height="wrap_content"
 				    android:textColor="#555555"
@@ -66,7 +66,7 @@
 		              android:text="@string/place_list_item_long_label" />
 		             
 		          <TextView
-		              android:id="@+id/place_list_item_latitude"
+		              android:id="@+id/place_list_item_longitude"
 		              android:layout_width="wrap_content"
 		              android:layout_height="wrap_content"
 		              android:textColor="#555555"
