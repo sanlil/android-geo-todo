@@ -118,7 +118,7 @@ public class PlaceListFragment extends ListFragment {
 	private class PlaceAdapter extends ArrayAdapter<Place> {
 
 		private int[] rowColors = new int[] { Color.parseColor("#eeeeee"),
-				Color.parseColor("#dddddd") };
+				Color.parseColor("#d9e8ee") };
 
 		public PlaceAdapter(ArrayList<Place> places) {
 			super(getActivity(), 0, places);

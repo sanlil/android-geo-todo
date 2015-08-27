@@ -2,9 +2,15 @@
 <resources>
     
     <!-- Colors -->
-	<color name="primary_color">#58b1fb</color>
+    <color name="primary_color">#33b5e5</color>
+	<color name="secondary_color">#d9e8ee</color>
 	<color name="white">#ffffff</color>
 	<color name="off_white">#eeeeee</color>
+	<color name="gray">#cccccc</color>
+	
+	
+	<color name="primary_color2">#379efb</color>
+	<color name="actionbar_color">#4d9cfa</color>
 
 	<!-- Strings -->
     <string name="app_name">Geo Todo</string>
