@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -29,11 +30,13 @@ public class PlaceFragment extends Fragment implements ConnectionCallbacks,
 	private static final String TAG = "PlaceFragment";
 
 	private Place mPlace;
+	private GoogleApiClient mGoogleApiClient;
+	private Location mLastLocation;
 	private EditText mTitleField;
 	private EditText mLatitudeField;
 	private EditText mLongitudeField;
-	private GoogleApiClient mGoogleApiClient;
-	private Location mLastLocation;
+	private Button mSaveButton;
+	private Button mCancelButton;
 
 	public static PlaceFragment newInstance(UUID placeId) {
 		Bundle args = new Bundle();
@@ -88,6 +91,29 @@ public class PlaceFragment extends Fragment implements ConnectionCallbacks,
 
 			public void afterTextChanged(Editable c) {
 				// intentionally left blank
+			}
+		});
+
+		mSaveButton = (Button) v.findViewById(R.id.save_place_button);
+		mSaveButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Log.d(TAG, "save place");
+				if (NavUtils.getParentActivityName(getActivity()) != null) {
+					NavUtils.navigateUpFromSameTask(getActivity());
+				}
+			}
+		});
+
+		mCancelButton = (Button) v.findViewById(R.id.cancel_save_place_button);
+		mCancelButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Log.d(TAG, "cancel saving place");
+				PlaceStorage.get(getActivity()).deletePlace(mPlace);
+				if (NavUtils.getParentActivityName(getActivity()) != null) {
+					NavUtils.navigateUpFromSameTask(getActivity());
+				}
 			}
 		});
 

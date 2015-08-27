@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    
+    <!-- Colors -->
+	<color name="primary_color">#58b1fb</color>
+	<color name="white">#ffffff</color>
+	<color name="off_white">#eeeeee</color>
 
+	<!-- Strings -->
     <string name="app_name">Geo Todo</string>
     <string name="title_new_task">New Task</string>
     <string name="title_new_place">New Place</string>

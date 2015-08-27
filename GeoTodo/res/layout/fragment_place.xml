@@ -15,6 +15,10 @@
 		android:layout_height="wrap_content"
 		android:hint="@string/place_title_hint"
 		/>
+    
+    <View 
+	    android:layout_width="1dp" 
+	    android:layout_height="8dp"/>
 
     <TextView
         style="?android:listSeparatorTextViewStyle"
@@ -32,10 +36,11 @@
         android:paddingTop="8dp" >
         
         <TextView
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="0.5"
-	        android:text="@string/place_location_latitude" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/place_location_latitude"
+            android:textSize="16sp" />
         
         <EditText
             android:id="@+id/latitude_textfield"
@@ -55,10 +60,11 @@
         android:paddingTop="8dp" >
         
         <TextView
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="0.5"
-	        android:text="@string/place_location_longitude" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/place_location_longitude"
+            android:textSize="16sp" />
         
         <EditText
             android:id="@+id/longitude_textfield"
@@ -66,6 +72,37 @@
 	        android:layout_height="wrap_content"
 	        android:layout_weight="0.5"
 	        android:text="0,0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:paddingTop="16dp" >
+
+        <Button
+            android:id="@+id/cancel_save_place_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/off_white"
+            android:elevation="4dp"
+            android:minWidth="100dp"
+            android:text="Cancel" />
+        
+        <View 
+            android:layout_width="16dp" 
+            android:layout_height="1dp"/>
+
+        <Button
+            android:id="@+id/save_place_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_color"
+            android:elevation="4dp"
+            android:minWidth="100dp"
+            android:text="Save"
+            android:textColor="@color/white" />
+
     </LinearLayout>
     
 </LinearLayout>
