@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -102,17 +103,17 @@ public class TaskFragment extends Fragment {
 		PlaceStorage.get(getActivity()).savePlaces();
 	}
 
-	// @Override
-	// public boolean onOptionsItemSelected(MenuItem item) {
-	// switch (item.getItemId()) {
-	// case android.R.id.home:
-	// if (NavUtils.getParentActivityName(getActivity()) != null) {
-	// NavUtils.navigateUpFromSameTask(getActivity());
-	// }
-	// return true;
-	// default:
-	// return super.onOptionsItemSelected(item);
-	// }
-	// }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			if (NavUtils.getParentActivityName(getActivity()) != null) {
+				NavUtils.navigateUpFromSameTask(getActivity());
+			}
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
 
 }

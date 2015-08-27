@@ -165,13 +165,14 @@ public class TaskListFragment extends ListFragment {
 					.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 						public void onCheckedChanged(CompoundButton buttonView,
 								boolean isChecked) {
-							Log.d(TAG, "Checked is changed");
-							Log.d(TAG,
-									task.getTitle() + " isDone: "
-											+ !task.isDone());
-							task.setDone(!task.isDone());
-							PlaceStorage.get(getActivity()).savePlaces();
-							// notifyDataSetChanged();
+							if (isChecked != task.isDone()) {
+								task.setDone(isChecked);
+								Log.d(TAG, "Checked is changed");
+								Log.d(TAG, task.getTitle() + " isDone: "
+										+ isChecked);
+								PlaceStorage.get(getActivity()).savePlaces();
+								// notifyDataSetChanged();
+							}
 						}
 					});
 
@@ -180,6 +181,7 @@ public class TaskListFragment extends ListFragment {
 			deleteButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					Log.d(TAG, "remove task " + task.getTitle());
 					mTaskList.deleteTask(task);
 					notifyDataSetChanged();
 				}

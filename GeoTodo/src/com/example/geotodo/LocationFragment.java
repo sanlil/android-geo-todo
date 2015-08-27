@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -48,8 +51,12 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		Log.d(TAG, "onCreateView()");
+		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
+
 		View v = inflater.inflate(R.layout.fragment_location_container,
 				container, false);
+
 		mPlaceTitleView = (TextView) v.findViewById(R.id.place_list_item_title);
 		mLatitudeView = (TextView) v
 				.findViewById(R.id.place_list_item_latitude);
@@ -60,12 +67,29 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 		mNewTaskLayout = (LinearLayout) v
 				.findViewById(R.id.new_task_button_layout);
 		mNewTaskButton = (Button) v.findViewById(R.id.new_task_button);
-		// mNewTaskText = (EditText) v.findViewById(R.id.new_task_title);
-		// mSaveButton = (ImageView) v.findViewById(R.id.task_save_button);
+
 		showTaskListFragment(new NoPlaceFragment());
 		buildGoogleApiClient();
 
 		return v;
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		menu.clear();
+		inflater.inflate(R.menu.fragment_location_menu, menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.menu_refresh_location:
+			onConnected(new Bundle());
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	@Override

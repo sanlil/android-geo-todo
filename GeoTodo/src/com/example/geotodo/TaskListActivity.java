@@ -39,7 +39,7 @@ public class TaskListActivity extends FragmentActivity {
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.fragment_task_list, menu);
+		inflater.inflate(R.menu.fragment_task_list_menu, menu);
 		return true;
 	}
 

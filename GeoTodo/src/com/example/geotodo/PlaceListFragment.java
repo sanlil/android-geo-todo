@@ -66,7 +66,7 @@ public class PlaceListFragment extends ListFragment {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
 		menu.clear();
-		inflater.inflate(R.menu.fragment_place_list, menu);
+		inflater.inflate(R.menu.fragment_place_list_menu, menu);
 	}
 
 	@Override
