@@ -18,7 +18,6 @@ public class PlaceStorage {
 
 	private PlaceStorage(Context appContext) {
 		mAppContext = appContext;
-		// mPlaces = new ArrayList<Place>();
 		mJSONConverter = new DataJSONConverter(mAppContext, FILENAME);
 
 		try {

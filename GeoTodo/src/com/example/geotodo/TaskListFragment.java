@@ -41,7 +41,6 @@ public class TaskListFragment extends ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// setHasOptionsMenu(true);
 		UUID placeId = (UUID) getArguments().getSerializable(EXTRA_PLACE_ID);
 		Place place = PlaceStorage.get(getActivity()).getPlace(placeId);
 		mTaskList = place.getTaskList();
@@ -68,45 +67,6 @@ public class TaskListFragment extends ListFragment {
 
 		return v;
 	}
-
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		Task task = ((TaskAdapter) getListAdapter()).getItem(position);
-		Log.d(TAG, task.getTitle() + "was clicked");
-
-		// Start TaskActivity
-		// Intent i = new Intent(getActivity(), TaskActivity.class);
-		// i.putExtra(TaskFragment.EXTRA_TASK_ID, task.getId());
-		// startActivity(i);
-
-		// task.setDone(!task.isDone());
-		// PlaceStorage.get(getActivity()).savePlaces();
-		// CheckBox solvedCheckBox = (CheckBox) v
-		// .findViewById(R.id.task_list_item_solved);
-		// solvedCheckBox.setChecked(task.isDone());
-	}
-
-	// @Override
-	// public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-	// super.onCreateOptionsMenu(menu, inflater);
-	// menu.clear();
-	// inflater.inflate(R.menu.fragment_task_list, menu);
-	// }
-
-	// @Override
-	// public boolean onOptionsItemSelected(MenuItem item) {
-	// switch (item.getItemId()) {
-	// case R.id.menu_item_new_task:
-	// Task task = new Task();
-	// mTaskList.addTask(task);
-	// Intent i = new Intent(getActivity(), TaskActivity.class);
-	// i.putExtra(TaskFragment.EXTRA_TASK_ID, task.getId());
-	// startActivityForResult(i, 0);
-	// return true;
-	// default:
-	// return super.onOptionsItemSelected(item);
-	// }
-	// }
 
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
@@ -171,7 +131,6 @@ public class TaskListFragment extends ListFragment {
 								Log.d(TAG, task.getTitle() + " isDone: "
 										+ isChecked);
 								PlaceStorage.get(getActivity()).savePlaces();
-								// notifyDataSetChanged();
 							}
 						}
 					});

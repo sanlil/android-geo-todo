@@ -85,8 +85,6 @@ public class TaskFragment extends Fragment {
 		mSaveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// Intent i = new Intent(WinActivity.this, GameActivity.class);
-				// startActivity(i);
 				if (NavUtils.getParentActivityName(getActivity()) != null) {
 					NavUtils.navigateUpFromSameTask(getActivity());
 				}

@@ -16,7 +16,6 @@ public class TaskListActivity extends FragmentActivity {
 	UUID placeId;
 
 	protected Fragment createFragment() {
-		// return new TaskListFragment();
 		placeId = (UUID) getIntent().getSerializableExtra(
 				TaskListFragment.EXTRA_PLACE_ID);
 		return TaskListFragment.newInstance(placeId);

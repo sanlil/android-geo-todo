@@ -29,16 +29,12 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 
 	private GoogleApiClient mGoogleApiClient;
 	private Location mLastLocation;
-	// private Place currentPlace;
 	private TextView mPlaceTitleView;
 	private TextView mLatitudeView;
 	private TextView mLongitudeView;
 	private LinearLayout mHeaderLayout;
 	private LinearLayout mNewTaskLayout;
 	private Button mNewTaskButton;
-
-	// private ImageView mSaveButton;
-	// private EditText mNewTaskText;
 
 	protected synchronized void buildGoogleApiClient() {
 		mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
@@ -136,29 +132,6 @@ public class LocationFragment extends Fragment implements ConnectionCallbacks,
 				startActivityForResult(i, 0);
 			}
 		});
-
-		// mSaveButton.setOnClickListener(new View.OnClickListener() {
-		// @Override
-		// public void onClick(View v) {
-		// Log.d(TAG, "CLICK SAVE NEW TASK");
-		// }
-		// });
-		// mNewTaskText.setOnKeyListener(new OnKeyListener() {
-		//
-		// @Override
-		// public boolean onKey(View v, int keyCode, KeyEvent event) {
-		// if (keyCode == KeyEvent.KEYCODE_ENTER
-		// && event.getAction() == KeyEvent.ACTION_DOWN) {
-		// Log.d(TAG, "ENTER CLICK");
-		// Task t = new Task();
-		// t.setTitle(mNewTaskText.getText().toString());
-		// currentPlace.getTaskList().addTask(t);
-		// PlaceStorage.get(getActivity()).savePlaces();
-		// return false;
-		// }
-		// return false;
-		// }
-		// });
 	}
 
 	/*
