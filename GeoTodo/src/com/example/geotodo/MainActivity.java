@@ -11,7 +11,7 @@ public class MainActivity extends FragmentActivity {
 	private TabsPagerAdapter mAdapter;
 	private ViewPager mViewPager;
 	private ActionBar actionBar;
-	private String[] tabs = { "Tasks", "Places" };
+	private String[] tabs = { "This Location", "Places" };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
